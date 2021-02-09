@@ -1,7 +1,10 @@
-body {
-    background-color: purple;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-h1{
-    font-size:medium;
-}
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html> 

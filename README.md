@@ -1,14 +1,20 @@
-#!/bin/bash
-cd gitignore
-git pull origin master
-cd ..
-pwd
-if [[ `git status --porcelain` ]]; then
-  echo "status: Updating templates"
-  git add .
-  git commit -m "Upading templates from https://github.com/dvcs/gitignore"
-  git commit -m "Upading templates from https://github.com/toptal/gitignore"
-  git push origin master
-else
-  echo "status: No updates"
-fi
+FROM vapor/vapor:1.0.9-xenial
+
+FROM swift:4.1
+WORKDIR /app
+
+COPY ./ ./
+
+RUN vapor build
+
+ADD . ./
+RUN git submodule update --init --recursive
+RUN swift package clean
+RUN swift build -c release
+RUN mkdir /app/bin
+RUN mv `swift build -c release --show-bin-path` /app/bin
+EXPOSE 8080
+
+# CMD vapor run
+
+ENTRYPOINT ./bin/release/Run serve -e prod -b 0.0.0.0

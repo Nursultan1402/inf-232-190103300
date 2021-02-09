@@ -1,1 +1,9 @@
-# inf-232-190103300
+# Generated files
+.phpunit.result.cache
+.phpunit.cache
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+# Build data
+/build/
